@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farhad's AI Invention Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <header class="bg-purple-700 text-white p-6 text-center shadow-md">
+    <h1 class="text-3xl font-bold">Farhad Nasserghodsi's AI Invention Portfolio</h1>
+    <p class="text-lg">Explore 118 AI Innovations – Filter by Category & Readiness</p>
+  </header>
+
+  <section class="max-w-6xl mx-auto px-4 py-8">
+    <div class="flex flex-col md:flex-row md:justify-between items-center mb-6">
+      <input type="text" id="searchBox" placeholder="Search inventions..." class="mb-4 md:mb-0 p-2 border border-gray-300 rounded-md w-full md:w-1/2">
+      <select id="categoryFilter" class="ml-0 md:ml-4 p-2 border border-gray-300 rounded-md">
+        <option value="All">All Categories</option>
+        <option value="Medical & Health">Medical & Health</option>
+        <option value="Business & Marketing">Business & Marketing</option>
+        <option value="Education & Learning">Education & Learning</option>
+        <option value="Personal Growth & Coaching">Personal Growth & Coaching</option>
+        <option value="Law Enforcement & Security">Law Enforcement & Security</option>
+        <option value="Accessibility & Emotional Support">Accessibility & Emotional Support</option>
+        <option value="Content & Communication">Content & Communication</option>
+        <option value="Ecosystem & Infrastructure">Ecosystem & Infrastructure</option>
+        <option value="Legal & Compliance">Legal & Compliance</option>
+        <option value="Environment & Agriculture">Environment & Agriculture</option>
+        <option value="Other / Misc">Other / Misc</option>
+      </select>
+    </div>
+
+    <div id="inventionGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Invention cards will be injected here by JavaScript -->
+    </div>
+  </section>
+
+  <script>
+    const inventions = [
+      { name: "VisionWing™", category: "Accessibility & Emotional Support" },
+      { name: "RecallIQ™", category: "Medical & Health" },
+      { name: "EduWing™", category: "Education & Learning" },
+      { name: "Smart Funnel™", category: "Business & Marketing" },
+      { name: "AutoLetter AI™", category: "Business & Marketing" },
+      { name: "BotLight AI™", category: "Business & Marketing" },
+      { name: "IntelliScan AI™", category: "Business & Marketing" },
+      { name: "MemoryLens™", category: "Content & Communication" },
+      { name: "FirstBrick™", category: "Ecosystem & Infrastructure" },
+      { name: "BrickBoard™", category: "Ecosystem & Infrastructure" },
+      { name: "PatientRecallIQ™", category: "Medical & Health" },
+      { name: "SmartNote™", category: "Medical & Health" },
+      { name: "SmartCode™", category: "Medical & Health" },
+      { name: "AutoLab™", category: "Medical & Health" },
+      { name: "AutoResults™", category: "Medical & Health" },
+      { name: "InboxIQ™", category: "Medical & Health" },
+      { name: "DetectiAI™", category: "Law Enforcement & Security" },
+      { name: "SceneVision AI™", category: "Law Enforcement & Security" },
+      { name: "CaseBoard AI™", category: "Law Enforcement & Security" },
+      { name: "SuspectMap™", category: "Law Enforcement & Security" },
+      { name: "Baby PainMap AI™", category: "Medical & Health" },
+      { name: "ThriveMate AI™", category: "Personal Growth & Coaching" },
+      { name: "NeuroLift AI™", category: "Personal Growth & Coaching" },
+      { name: "SignalStop AI™", category: "Law Enforcement & Security" },
+      { name: "Worry Forecasting AI™", category: "Medical & Health" },
+      { name: "ReputationGuard AI™", category: "Legal & Compliance" },
+      { name: "ThreadLink AI™", category: "Ecosystem & Infrastructure" },
+      { name: "IdeaBloom AI™", category: "Ecosystem & Infrastructure" },
+      { name: "BloomBoard™", category: "Ecosystem & Infrastructure" },
+      { name: "Engagement Scan™", category: "Business & Marketing" },
+      { name: "MaskBreaker AI™", category: "Personal Growth & Coaching" },
+      { name: "SoulSync AI™", category: "Personal Growth & Coaching" },
+      { name: "WorkLens AI™", category: "Business & Marketing" },
+      { name: "MediBridge AI™", category: "Medical & Health" },
+      { name: "EcoNudge AI™", category: "Environment & Agriculture" },
+      { name: "EduCore AI™", category: "Education & Learning" },
+      { name: "JustAI™", category: "Legal & Compliance" },
+      { name: "MirrorMind AI™", category: "Personal Growth & Coaching" },
+      { name: "PostCleaner™", category: "Other / Misc" },
+      { name: "Offer Expander AI™", category: "Business & Marketing" },
+      { name: "AutoPost.AI™", category: "Business & Marketing" },
+      { name: "ScanTalk AI™", category: "Content & Communication" },
+      { name: "TruthCheck AI™", category: "Content & Communication" },
+      { name: "Maple – Virtual Assistant", category: "Ecosystem & Infrastructure" },
+      { name: "MemoryLens™", category: "Content & Communication" },
+      { name: "Guidelight AI™", category: "Accessibility & Emotional Support" },
+      { name: "AlignGenie™", category: "Business & Marketing" },
+      { name: "What If AI™ – Life Regret Preventer", category: "Personal Growth & Coaching" },
+      { name: "FireSight AI™", category: "Environment & Agriculture" },
+      { name: "DentistFinder Agent™", category: "Medical & Health" },
+      { name: "AgentBag™", category: "Ecosystem & Infrastructure" },
+      { name: "Nexora™", category: "Ecosystem & Infrastructure" },
+      { name: "EchoBuilder™", category: "Ecosystem & Infrastructure" },
+      { name: "AgentVox™", category: "Content & Communication" },
+      { name: "EduWing Prep™", category: "Education & Learning" },
+      { name: "EduWing Trade™", category: "Education & Learning" },
+      { name: "DemoPitch Tuesdays", category: "Content & Communication" }
+      // (Total count: 55 shown for now — remaining 63 to be appended in final version)
+    ];
+
+    const grid = document.getElementById("inventionGrid");
+    const searchBox = document.getElementById("searchBox");
+    const categoryFilter = document.getElementById("categoryFilter");
+
+    function displayInventions() {
+      const search = searchBox.value.toLowerCase();
+      const category = categoryFilter.value;
+
+      grid.innerHTML = "";
+
+      inventions.filter(inv =>
+        (category === "All" || inv.category === category) &&
+        inv.name.toLowerCase().includes(search)
+      ).forEach(inv => {
+        const card = document.createElement("div");
+        card.className = "bg-white shadow p-4 rounded-md border border-gray-200";
+        card.innerHTML = `<h3 class="text-lg font-semibold">${inv.name}</h3>
+                          <p class="text-sm text-gray-500 mt-1">${inv.category}</p>`;
+        grid.appendChild(card);
+      });
+    }
+
+    searchBox.addEventListener("input", displayInventions);
+    categoryFilter.addEventListener("change", displayInventions);
+
+    displayInventions();
+  </script>
+</body>
+</html>
